@@ -6,10 +6,13 @@
     <title>Formulário</title>
 </head>
 <body>
-    <form action="/" method="POST">
+    <form method="POST">
         <label for="inputName">Digite algo:</label>
-        <input type="text" id="inputName" name="inputName" required>
-        <button type="submit">Enviar</button>
+        <input type="text" name="Nome" required>
+        <input type="text" name="Email" required>
+        <input type="text" name="Sexo" required>
+        <button type="submit" onclick="semvalor('inputName')">Enviar</button>
     </form>
+
 </body>
 </html>

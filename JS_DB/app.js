@@ -1,11 +1,15 @@
-const Sequelize = require("sequelize");
+const {Sequelize,DataTypes} = require("sequelize");
 const Express = require('express')
 const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = Express();
 const port = 3000;
-let inputValue = ""
+
+let bd = ""
+let nm = ""
+let eml = ""
+let sxo = ""
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Rota para servir o HTML
@@ -13,18 +17,22 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+bd = new Sequelize('mysql', 'root', '123456', {
+    host: "localhost",
+    dialect: "mysql",
+    port: 3306
+});
+
 // Rota para receber o request do formulário
 app.post('/', (req, res) => {
-    inputValue = req.body.inputName; // "inputName" deve ser o nome do seu input no HTML
-    console.log(inputValue);
-    if (inputValue!="") {
-        const bd = new Sequelize('mysql', 'isaq', '123456', {
-            host: "localhost",
-            dialect: "mysql",
-            port: 3306
-        });
-        
-        
+
+    nm = req.body.Nome
+    eml = req.body.Email
+    sxo = req.body.Sexo
+    console.log(`Nome : ${nm} \nEmail : ${eml} \nSexo : ${sxo}\n--------------`);
+
+    if (nm!="") {
+
         bd.authenticate()
             .then(() => {
                 console.log("Conectado!!");
@@ -36,16 +44,13 @@ app.post('/', (req, res) => {
         
         const Usuario = bd.define('Teste', {
             nome: {
-                type: Sequelize.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             email: {
-                type: Sequelize.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             },
             sexo: {
-                type: Sequelize.STRING,
-                allowNull: false
+                type: DataTypes.STRING
             }
         });
         
@@ -54,9 +59,9 @@ app.post('/', (req, res) => {
             .then(() => {
                 console.log("Tabela sincronizada");
                 return Usuario.create({
-                    nome: inputValue,
-                    email: 'teste@email.com',
-                    sexo: "Masculino"
+                    nome: nm,
+                    email: eml,
+                    sexo: sxo
                 });
             }).catch(error => {
                 console.error("Erro:", error);
@@ -65,6 +70,22 @@ app.post('/', (req, res) => {
     }
 });
 
+app.get('/dados' , async(req,res)=>{
+    async function TodosOsIds() {
+        const usuarios = await bd.findAll({
+            attributes:['id'],
+        }) 
+
+        const ids = usuarios.map(usuario=>usuario.id)
+        return ids
+    }
+    let x=''
+    async function navariavel() {
+        x = await TodosOsIds()
+        console.log(`Todos os ids : ${x}`)
+    }
+    navariavel()
+})
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
 });
