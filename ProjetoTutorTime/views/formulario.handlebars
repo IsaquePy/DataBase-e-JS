@@ -1,0 +1,43 @@
+<style>
+    body{
+        background-color: gray;
+    }
+    .caixa{
+        background-color: white;
+        color: black;
+        border-radius: 20%;
+        border: black 5px solid;
+        width: 400px;
+        height: 500px;    
+        margin-left: 35%;
+        margin-top: 100px;
+        align-items: center;
+        text-align: center;
+        line-height: 30px;
+    }
+    input{
+        width: 300px;
+        height: 25px;
+        border-radius:5%;
+        border: black 5px solid;
+    }
+    button{
+        background-color: gray;
+        border-radius: 10%;
+        width: 200px;
+    }
+</style>
+<div class="caixa">
+    <form action="/add" method="POST">
+        <h1>CADASTRO DE MONITORIA</h1>
+        Matéria : <br>
+        <input type="text" name="materia"><br>
+        Professor : <br>
+        <input type="text" name="professor"><br>
+        Descrição : <br>
+        <input type="text" name="descricao"><br>
+        Horário : <br>
+        <input type="text" name="horario"><br>
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>

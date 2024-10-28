@@ -1,0 +1,23 @@
+<!--Estilo-->
+<style>
+    h1{
+        color:blue;
+    }
+    body{
+        background-color: gray;
+    }
+</style>
+
+<h1>Lista de Posts : </h1>
+
+<hr>
+
+{{#each posts}}
+    
+    Titulo : <h1>{{titulo}}</h1>
+    Conteúdo : <p>{{conteudo}}</p>
+    <a href="/deletar/{{id}}"><button>Deletar</button></a>
+    <hr>
+{{/each}}
+
+<a href="/cad">Voltar</a>

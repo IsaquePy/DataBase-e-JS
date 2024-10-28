@@ -10,6 +10,7 @@ let bd = ""
 let nm = ""
 let eml = ""
 let sxo = ""
+let Usuario=''
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Rota para servir o HTML
@@ -42,7 +43,7 @@ app.post('/', (req, res) => {
             });
         
         
-        const Usuario = bd.define('Teste', {
+        Usuario = bd.define('Teste', {
             nome: {
                 type: DataTypes.STRING
             },
@@ -72,7 +73,7 @@ app.post('/', (req, res) => {
 
 app.get('/dados' , async(req,res)=>{
     async function TodosOsIds() {
-        const usuarios = await bd.findAll({
+        const usuarios = await Usuario.findAll({
             attributes:['id'],
         }) 
 

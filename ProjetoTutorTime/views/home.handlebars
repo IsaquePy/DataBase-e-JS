@@ -1,0 +1,28 @@
+<style>
+    .caixa{
+        border: black 5px solid;
+        border-radius: 20%;
+        width: 250px;
+        height: 250px;
+        text-align: center;
+        display: inline-block;
+        margin-top: 10px;
+    }
+    .centro{
+        text-align:center;
+    }
+</style>
+
+{{#each monitorias}}
+    <div class="caixa">
+        <h1>{{Materia}}</h1>
+        <p>Desc : {{Descricao}}</p>
+        <p>Prof : {{Professor}}</p>
+        <p>{{Horario}}</p>
+    </div>    
+{{/each}}
+<br>
+<div class="centro">
+<a href="/home/deletar">Deletar</a>
+<a href="/form">Adicionar</a>
+</div>
